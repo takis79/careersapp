@@ -1,4 +1,4 @@
-# Recruiting CRM
+# Recruiting CRM - Tech3s.tech
 
 This project is the result of a personal project to understand Django framework. As an experiment, I worked with real recruiters that specialize in the tech industry to understand their needs. The result is a simple and efficient CRM tailored for recruitment processes. 
 
@@ -9,7 +9,7 @@ Sections:
 - Skills: set of programming languages, frameworks or technologies related to a job oppening
 - To-do list: actions that recruiters must complete in a specified date
  
-![Django CRM](https://github.com/RodrigoVillatoro/recruiting_crm/blob/master/screenshot.png)
+#![Django CRM](https://github.com/RodrigoVillatoro/recruiting_crm/blob/master/screenshot.png)
 
 In all the sections, users can add, edit, delete entries. Users can also assign companies and tasks to other users.
 
