@@ -1,0 +1,23 @@
+{% extends "crm/base_crm.html" %}
+
+{% block title %}
+  {{ block.super }} - To Do List
+{% endblock %}
+
+{% block crm_content %}
+  <h2>To Do List</h2>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="list-group">
+        {% for company_action in company_action_to_do_list %}
+          <a href="{{ company_action.get_absolute_url }}" class="list-group-item">
+            <strong>{{ company_action.company }}: {{ company_action.action|title }} </strong>
+            <small>Created: {{ company_action.timestamp }} by {{ company_action.created_by.get_full_name }}</small>
+          </a>
+        {% empty %}
+          <p>There are no pending actions.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

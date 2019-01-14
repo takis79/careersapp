@@ -1,0 +1,24 @@
+{% extends "crm/base_crm.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ block.super }} - Update Company
+{% endblock %}
+
+{% block content %}
+  <h2>Update Company <small>{{ company.name }}</small></h2>
+  <div class="row">
+    <div class="col-md-7">
+      <form action="{{ company.get_update_url }}" method="post" class="form-horizontal">
+        {% csrf_token %}
+        {% crispy form %}
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-7">
+            <a href="{{ company.get_absolute_url }}" role="button" class="btn btn-default">Cancel</a>
+            <input class="btn btn-primary" type="submit" value="Update Company">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'crm/base_crm.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {{ block.super }} - Add Action
+{% endblock %}
+
+{% block content %}
+  <h2>Add Action <small>{{ company }}</small></h2>
+  <div class="row">
+    <div class="col-md-7">
+      <form action="{{ company.get_company_action_create_url }}" method="post" class="form-horizontal">
+        {% csrf_token %}
+        {% crispy form %}
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-7">
+            <input class="btn btn-primary" type="submit" value="Add Action">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

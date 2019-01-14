@@ -1,0 +1,110 @@
+{% extends "crm/base_crm.html" %}
+
+{% block title %}
+  {{ block.super }} - {{ contact.name }}
+{% endblock %}
+
+{% block content %}
+  <article>
+    <div class="row">
+      <div class="col-md-8">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'crm_contact_list' %}">Contacts</a></li>
+          <li><a href="{{ contact.company.get_absolute_url }}">{{ contact.company.name }}</a></li>
+          <li class="active">{{ contact.get_full_name }}</li>
+        </ol>
+        <h2>{{ contact.get_full_name }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <section>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  Contact Details
+                  <span class="small"><a href="{{ contact.get_update_url }}">Edit</a></span>
+                </h3>
+              </div>
+              <div class="panel-body">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <table>
+                      <tr>
+                        <td>Company:</td>
+                        <td><a href="{{ contact.company.get_absolute_url }}">{{ contact.company }}</a></td>
+                      </tr>
+                      {% if contact.title %}
+                        <tr>
+                          <td>Title:</td>
+                          <td>{{ contact.title }}</td>
+                        </tr>
+                      {% endif %}
+                      <tr>
+                        <td>Email:</td>
+                        <td>{{ contact.email }}</td>
+                      </tr>
+                      {% if contact.phone %}
+                        <tr>
+                          <td>Phone:</td>
+                          <td>{{ contact.phone }}</td>
+                        </tr>
+                      {% endif %}
+                      {% if contact.mobile %}
+                        <tr>
+                          <td>Mobile:</td>
+                          <td>{{ contact.mobile }}</td>
+                        </tr>
+                      {% endif %}
+                      <tr>
+                        <td>Country:</td>
+                        <td>{{ contact.city.country }}</td>
+                      </tr>
+                      <tr>
+                        <td>City:</td>
+                        <td>{{ contact.city }}</td>
+                      </tr>
+                      {% if contact.address %}
+                        <tr>
+                          <td>Address:</td>
+                          <td>{{ contact.address }}</td>
+                        </tr>
+                      {% endif %}
+                      {% if contact.zipcode %}
+                        <tr>
+                          <td>Zip Code:</td>
+                          <td>{{ contact.zipcode }}</td>
+                        </tr>
+                      {% endif %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </section>
+      </div>
+      <div class="col-md-4">
+        <section>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                Open Jobs
+              </h3>
+            </div>
+            <div class="panel-body">
+              <ul>
+                {% for job in contact.company.jobs.all %}
+                  <li>
+                    <a href="{{ job.get_absolute_url }}">{{ job.title }}</a>
+                  </li>
+                {% empty %}
+                    <li>There are no jobs for this company.</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+{% endblock %}

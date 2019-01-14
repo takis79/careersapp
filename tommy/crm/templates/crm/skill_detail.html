@@ -1,0 +1,50 @@
+{% extends "crm/base_crm.html" %}
+
+{% block title %}
+  {{ block.super }} - {{ skill.name }}
+{% endblock %}
+
+{% block content %}
+  <h2>{{ skill.name }}</h2>
+
+  {% if skill.companies.all %}
+    <section>
+      <h3>Companies</h3>
+      <p>
+        This skill is associated with
+        {{ skill.companies.count }}
+        compan{{ skill.companies.count|pluralize:"y,ies" }}
+      </p>
+      <ul>
+        {% for company in skill.companies.all %}
+          <li>
+            <a href="{{ company.get_absolute_url }}">{{ company.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% if skill.jobs.all %}
+    <section>
+      <h3>Jobs</h3>
+      <p>
+        This skill is associated with
+        {{ skill.jobs.count }}
+        job{{ skill.jobs.count|pluralize}}
+      </p>
+      <ul>
+        {% for job in skill.jobs.all %}
+          <li>
+            <a href="{{ job.get_absolute_url }}">{{ job.title|title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+
+  {% if not skill.companies.all and not skill.jobs.all %}
+    <p>This skill is not related to any content.</p>
+  {% endif %}
+{% endblock %}

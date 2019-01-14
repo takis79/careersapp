@@ -1,0 +1,26 @@
+{% extends "crm/base_crm.html" %}
+
+{% block title %}
+  {{ block.super }} - Contacts
+{% endblock %}
+
+{% block crm_content %}
+  <h2>Contacts</h2>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="list-group">
+        {% for contact in contact_list %}
+          <a href="{{ contact.get_absolute_url }}" class="list-group-item">
+            <strong>{{ contact.get_full_name }}</strong>
+            <small> - {{ contact.company }}</small>
+          </a>
+        {% empty %}
+          <p>There are no contacts to display.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <a role="button" class="btn btn-primary" href="{% url 'crm_contact_create_general' %}">Add Contact</a>
+    </div>
+  </div>
+{% endblock %}

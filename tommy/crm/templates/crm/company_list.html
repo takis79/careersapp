@@ -1,0 +1,29 @@
+{% extends "crm/base_crm.html" %}
+
+{% block title %}
+  {{ block.super }} - Companies
+{% endblock %}
+
+{% block crm_content %}
+  <h2>Companies</h2>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="list-group">
+        {% for company in company_list %}
+          <a href="{{ company.get_absolute_url }}" class="list-group-item">
+            {% if company.jobs.count %}
+              <span class="badge">Jobs: {{ company.jobs.count }}</span>
+            {% endif %}
+            <strong>{{ company.name }}</strong>
+            <small> - {{ company.created_by.get_full_name|title }} </small>
+          </a>
+        {% empty %}
+          <p>There are no companies to display. Start by adding one.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <a role="button" class="btn btn-primary" href="{% url 'crm_company_create' %}">Add Company</a>
+    </div>
+  </div>
+{% endblock %}

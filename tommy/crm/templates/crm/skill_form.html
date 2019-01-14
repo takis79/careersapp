@@ -1,0 +1,23 @@
+{% extends 'crm/base_crm.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {{ block.super }} - Add Skill
+{% endblock %}
+
+
+{% block content %}
+  <h2>Add Skill</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <form action="{% url 'crm_skill_create' %}" method="post" class="form-horizontal">
+        {% crispy form %}
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-7">
+            <input class="btn btn-primary" type="submit" value="Add Skill">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

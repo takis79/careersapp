@@ -1,0 +1,101 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>{% block title %}Tommy{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'site/css/bootstrap.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'site/css/style.css' %}">
+  <script src="{% static 'site/js/jquery-1.12.4.min.js' %}"></script>
+  <script src="{% static 'site/js/bootstrap.js' %}"></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+      <div id="navmargin"></div>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            {% if user.is_authenticated %}
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            {% endif %}
+            <a class="navbar-brand" href="/">Tommy</a>
+          </div>
+
+          {% if user.is_authenticated %}
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="{% if '/companies/' in request.path %} active {% endif %}">
+                <a href="{% url 'crm_company_list' %}">Companies <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="{% if '/jobs/' in request.path %} active {% endif %}">
+                <a href="{% url 'crm_job_list' %}">Jobs</a>
+              </li>
+              <li class="{% if '/contacts/' in request.path %} active {% endif %}">
+                <a href="{% url 'crm_contact_list' %}">Contacts</a>
+              </li>
+              <li class="{% if '/skills/' in request.path %} active {% endif %}">
+                <a href="{% url 'crm_skill_list' %}">Skills</a>
+              </li>
+              <li class="{% if '/to-do-list/' in request.path %} active {% endif %}">
+                <a href="{% url 'crm_company_action_to_do_list' %}">To Do List</a>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{ user.first_name }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'crm_company_create' %}">Add Company</a></li>
+                  <li><a href="{% url 'crm_job_create_general' %}">Add Job</a></li>
+                  <li><a href="{% url 'crm_contact_create_general' %}">Add Contact</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{% url 'dj-auth:logout' %}">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+          {% endif %}
+        </div><!-- /.container-fluid -->
+      </nav>
+    </header>
+      <div class="container">
+      {% if messages %}
+        <div>
+          <div>
+            <ul>
+              {% for message in messages %}
+                {% if message.tags %}
+                  <li class="{{ message.tags }}">
+                {% else %}
+                  <li>
+                {% endif %}
+                {{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+      <div class="container">
+        <main>
+        {% block content %}{% endblock %}
+      </main>
+      </div>
+      <footer>
+      </footer>
+    </div>
+</body>
+</html>

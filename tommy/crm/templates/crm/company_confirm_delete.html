@@ -1,0 +1,19 @@
+{% extends "crm/base_crm.html" %}
+
+{% block title %}
+{{ block.super }} - Delete Company
+{% endblock %}
+
+{% block content %}
+  <div>
+    <div>
+      <form action="{{ company.get_delete_url }}" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete company {{ company.name }}?</p>
+        <p>Warning! This action will also delete all the information associated with this company: it's Contacts, Jobs, Actions, etc.</p>
+        <a href="{{ company.get_absolute_url }}">Cancel</a>
+        <button type="submit">Delete Company</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
