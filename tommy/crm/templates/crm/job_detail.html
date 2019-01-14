@@ -26,7 +26,11 @@
               <div class="panel-heading">
                 <h3 class="panel-title">
                   Actions
+                  {% if request.user.is_superuser %}
+
                   <span class="small"><a href="{{ job.get_job_action_create_url }}">Add Action</a></span>
+                  {% endif %}
+
                 </h3>
               </div>
               <div class="panel-body">
@@ -57,7 +61,11 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 Details
+                {% if request.user.is_superuser %}
+
                 <span class="small"><a href="{{ job.get_update_url }}">Edit</a></span>
+                {% endif %}
+
               </h3>
             </div>
             <div class="panel-body">
@@ -135,7 +143,11 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 Contacts
+                {% if request.user.is_superuser %}
+
                 <span class="small"><a href="{{ job.company.get_contact_create_url }}">Add Contact</a></span>
+                {% endif %}
+
               </h3>
             </div>
             <div class="panel-body">
@@ -213,8 +225,3 @@
     </div>
   </article>
 {% endblock %}
-
-
-
-
-

@@ -21,8 +21,12 @@
         {% endfor %}
       </div>
     </div>
+    {% if request.user.is_superuser %}
+
     <div class="col-md-4">
       <a role="button" class="btn btn-primary" href="{% url 'crm_skill_create' %}">Add Skill</a>
     </div>
+    {% endif %}
+
   </div>
 {% endblock %}

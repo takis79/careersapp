@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>{% block title %}Tommy{% endblock %}</title>
+  <title>{% block title %}Tech3S Careers{% endblock %}</title>
   <link rel="stylesheet" type="text/css" href="{% static 'site/css/bootstrap.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'site/css/style.css' %}">
   <script src="{% static 'site/js/jquery-1.12.4.min.js' %}"></script>
@@ -26,7 +26,7 @@
               <span class="icon-bar"></span>
             </button>
             {% endif %}
-            <a class="navbar-brand" href="/">Tommy</a>
+            <a class="navbar-brand" href="/">Tech3s</a>
           </div>
 
           {% if user.is_authenticated %}
@@ -57,12 +57,17 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{ user.first_name }} <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, {{ user.username }} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                  {% if request.user.is_superuser %}
+
                   <li><a href="{% url 'crm_company_create' %}">Add Company</a></li>
                   <li><a href="{% url 'crm_job_create_general' %}">Add Job</a></li>
                   <li><a href="{% url 'crm_contact_create_general' %}">Add Contact</a></li>
+                  {% endif %}
+
                   <li role="separator" class="divider"></li>
+
                   <li><a href="{% url 'dj-auth:logout' %}">Logout</a></li>
                 </ul>
               </li>

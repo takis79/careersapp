@@ -22,12 +22,16 @@
         </section>
         <section>
           <div class="panel panel-default">
+            {% if request.user.is_superuser %}
+
             <div class="panel-heading">
               <h3 class="panel-title">
                 Open Jobs
                 <span class="small"><a href="{{ company.get_job_create_url }}">Add job</a></span>
               </h3>
             </div>
+            {% endif %}
+
             <div class="panel-body">
               <ul>
                 {% for job in company.jobs.all %}
@@ -42,6 +46,8 @@
             </div>
           </div>
         </section>
+        {% if request.user.is_superuser %}
+
         <section>
           <div class="panel panel-default">
               <div class="panel-heading">
@@ -93,6 +99,8 @@
               </div>
             </div>
         </section>
+        {% endif %}
+
       </div>
       <div class="col-md-4">
         <section>
@@ -100,7 +108,11 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 Company Info
+                {% if request.user.is_superuser %}
+
                 <span class="small"><a href="{{ company.get_update_url }}">Edit</a></span>
+                {% endif %}
+
               </h3>
             </div>
             <div class="panel-body">
@@ -196,7 +208,11 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 Contacts
+                {% if request.user.is_superuser %}
+
                 <span class="small"><a href="{{ company.get_contact_create_url }}">Add Contact</a></span>
+                {% endif %}
+
               </h3>
             </div>
             <div class="panel-body">
