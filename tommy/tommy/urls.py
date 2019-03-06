@@ -28,7 +28,7 @@ urlpatterns = [
         RedirectView.as_view(
             pattern_name='crm_company_list',
             permanent=False,
-        )
+        ), name='takis'
     ),
     url(r'^admin/', admin.site.urls),
     url(r'^companies/', include(company_urls)),

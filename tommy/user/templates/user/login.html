@@ -7,5 +7,6 @@
 
 {% block content %}
   {% include 'user/login_form.html' %}
-  <a href="{% url 'dj-auth:pw_reset_start' %}">Forgot your password?</a>
+  <a href="{% url 'dj-auth:pw_reset_start' %}">Forgot your password?</a>  <a href="{% url 'user:signup' %}">Register Here</a>
+
 {% endblock %}

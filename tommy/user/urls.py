@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
-
+from user import views
 
 password_urls = [
     url(
@@ -62,6 +62,8 @@ urlpatterns = [
             permanent=False,
         )
     ),
+    url(r'^signup/$', views.signup, name='signup'),
+
     url(
         r'^login/$',
         auth_views.login,
